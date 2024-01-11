@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"runtime"
 	"testing"
+	"unsafe"
 
 	"kubevirt.io/kubevirt/pkg/virt-launcher/virtwrap/api"
 	"libvirt.org/go/libvirtxml"
@@ -68,7 +69,17 @@ func do_runtime_check() {
 	fmt.Printf("+ Libvirtxml > Schema by %d bytes\n\n", total1-total2)
 }
 
+func do_unsize_of() {
+	lv := unsafe.Sizeof(libvirtxml.Domain{})
+	kv := unsafe.Sizeof(api.DomainSpec{})
+	fmt.Printf("libvirtxml: %d bytes\n", lv)
+	fmt.Printf("Kubevirt  : %d bytes\n\n", kv)
+}
+
 func main() {
+	fmt.Println("* Using unsize.Sizeof\n")
+	do_unsize_of()
+
 	fmt.Println("* Using testing.Benchmark\n")
 	do_test_benchmark()
 
