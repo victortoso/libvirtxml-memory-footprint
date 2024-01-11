@@ -3,6 +3,7 @@ module victortoso.com/libvirtxml-memory-footprint
 go 1.21
 
 require (
+	github.com/spf13/pflag v1.0.5
 	kubevirt.io/kubevirt v1.1.1
 	libvirt.org/go/libvirtxml v1.9008.0
 )
